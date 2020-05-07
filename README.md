@@ -1,0 +1,1 @@
+In this code you will learn to implement pagination using the custom pagination tag helper provided Cloudscribe , below is the documentation if you would like to explore other advance features.Md.Mahmudul Haque Khan(bappy392@gmail.com)

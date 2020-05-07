@@ -1,0 +1,77 @@
+﻿
+@*@model IEnumerable<TablePagination_Asp_net_core_3.Models.Book>*@
+@model cloudscribe.Pagination.Models.PagedResult<TablePagination_Asp_net_core_3.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Controller"] = "BookList";
+    ViewData["Action"] = "Index";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container row p-0 m-0">
+
+    <div class="col-9">
+        <h2 class="text-info">Book List</h2>
+
+    </div>
+
+    <div class="col-3">
+        <a asp-action="Create" asp-controller="BookList" class="btn btn-info form-control text-white">Create New Book</a>
+    </div>
+
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            @if (Model.Data.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="tbl-secondary">
+                        <th>
+                            <label asp-for="@Model.Data.FirstOrDefault().Name"></label>
+                        </th>
+                        <th>
+                            @*@Html.DisplayFor(m=>m.FirstOrDefault().Author)*@
+                            <label asp-for="@Model.Data.FirstOrDefault().Author"></label>
+                        </th>
+                        <th>
+                            <label asp-for="@Model.Data.FirstOrDefault().ISBN"></label>
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.ISBN)
+                            </td>
+                            <td>
+                                <button asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm next1">Delete</button>
+                                <a asp-route-id="@item.Id" asp-action="Edit" class="btn btn-success btn-sm text-white">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No books Available</p>
+            } 
+        </form>
+
+     <partial name="_PaginationPartial" view-data="ViewData" model="Model"/>
+
+    </div>
+
+
+
+</div>
+
